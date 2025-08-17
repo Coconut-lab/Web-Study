@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="root"></div>
+
+</body>
+
+<script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+
+
+<script type="text/babel" >
+    // function Btn(props) {
+    //     return <button style={{
+    //         backgroundColor: 'tomato',
+    //         color: 'white',
+    //         padding: '10px 20px',
+    //         border: 0,
+    //         borderRadius: 10,
+    //     }}>{props.text}</button>
+    // }
+
+    function Btn2({text2, fontSize = 10}) {
+        return <button
+            // 여기에 onClick을 적어야 이벤트 리스터
+            style={{
+                backgroundColor: 'tomato',
+                color: 'white',
+                padding: '10px 20px',
+                border: 0,
+                borderRadius: 10,
+                fontSize: fontSize,
+        }}>{text2}</button>
+    }
+
+    // const MemorizedBtn = React.memo(Btn2);
+    Btn2.propTypes = {
+        text2: PropTypes.string.isRequired,
+        fontSize: PropTypes.number,
+    };
+    function App() {
+        // const [value, setValue] = React.useState("Save Changes");
+        // const changeValues = () => setValue("Revert Changes");
+        return (
+            <div>
+                {/*
+                <MemorizedBtn text2={value} changeValues={changeValues}/>
+                <MemorizedBtn text2="Continue"/>
+                */}
+                <Btn2 text2="Save Changes" fontSize={18}/>
+                <Btn2 text2="Continue"/>
+            </div>
+        );
+    }
+    const root = document.getElementById('root');
+    ReactDOM.render(<App/>, root);
+</script>
+
+</html>

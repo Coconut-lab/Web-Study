@@ -35,7 +35,7 @@
         //     setCounter((current) => current + 1); // 이게 왜 counter를 업데이트 할까? current가 counter라는 정의를 한 적이 없는데?
         // };
         const [amount, setAmount] = React.useState(0);
-        const [flipped, setFlipped] = React.useState(false);
+        const [inverted, setInverted] = React.useState(false);
         const onChange = (event) => {
             setAmount(event.target.value);
 
@@ -44,8 +44,8 @@
             setAmount(0);
         }
 
-        const onFlip = () => {
-            setFlipped((current) => !current);
+        const onInvert = () => {
+            setInverted((current) => !current);
             reset();
         }
 
@@ -57,27 +57,27 @@
                 <div>
                     <label htmlFor="minutes">Minutes</label>
                     <input
-                        value={flipped ? amount*60 : amount}
+                        value={inverted ? amount*60 : amount}
                         id="minutes"
                         placeholder="Minutes"
                         type="number"
                         onChange={onChange}
-                        disabled={flipped}
+                        disabled={inverted}
                     />
                 </div>
                 <div>
                     <label htmlFor="hours">Hours</label>
                     <input
-                        value={flipped ? amount : Math.round(amount/60)}
+                        value={inverted ? amount : Math.round(amount/60)}
                         id="hours"
                         placeholder="Hours"
                         type="number"
                         onChange={onChange}
-                        disabled={!flipped}
+                        disabled={!inverted}
                     />
                 </div>
                 <button onClick={reset}>Reset</button>
-                <button onClick={onFlip}>Flip</button>
+                <button onClick={onInvert}>{inverted ? "Turn back" : "Invert"}</button>
             </div>
         );
     }
