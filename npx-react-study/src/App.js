@@ -1,33 +1,21 @@
-import { useState, useEffect } from 'react'
+import {useEffect, useState,} from 'react'
 
 function App() {
-    const [counter, setValue] = useState(0);
-    const [keyword, setKeyword] = useState("");
-    const onClick = () => setValue((prev) => prev + 1);
-    const onChange = (event) => {setKeyword(event.target.value);};
-    console.log("I run all the time!"); // input 입력 한글자 마다 작동함
-
-    useEffect(() => {
-        console.log("I run only once!");    // 오직 딱 한번
-    }, []);
-
-    useEffect(() => {
-        console.log("I run when 'keyword' changes.");
-    }, [keyword]);
-
-    useEffect(() => {
-        console.log("I run when 'counter' changes.");
-    }, [counter]);
-
-    useEffect(() => {
-        console.log("I run when 'keyword & counter' changes.");
-    }, [keyword, counter]);
+    const [loading, setLoading] = useState(true);
+    const [movies, setMovies] = useState([]);
+    const getMovies = async () => {
+        const response = await fetch(
+            `https://yts.mx/api/v2/list_movies.json?minimum_rating=8.8&sort_by=year`
+        );
+        const json = await response.json();
+        setMovies(json.data.movies);
+        setLoading(false);
+    };
+    console.log(movies);
 
     return (
         <div>
-            <input value={keyword} onChange={onChange} type="text" placeholder="Search here..." />
-            <h1>{counter}</h1>
-            <button onClick={onClick}>Click me!</button>
+            {loading ? <h1>Loading...</h1> : null}
         </div>
     );
 }
