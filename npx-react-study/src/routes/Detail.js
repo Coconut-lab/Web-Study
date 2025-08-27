@@ -5,7 +5,7 @@ function Detail() {
     const {id} = useParams();
     const getMovie = async() => {
         const json = await(
-            await fectch(`https://yts.mx/api/v2/movie_details.json?movie_id=${id}`)
+            await fetch(`https://yts.mx/api/v2/movie_details.json?movie_id=${id}`)
         ).json();
     }
     useEffect(() => {
@@ -14,6 +14,7 @@ function Detail() {
 
     return (
         <h1>Detail</h1>
+        
     );
 }
 
